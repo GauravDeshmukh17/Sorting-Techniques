@@ -38,7 +38,7 @@ public class Main{
 
 // SELECTION SORT
 
-import java.util.*;
+/*import java.util.*;
 
 public class Main{
 
@@ -69,6 +69,65 @@ public class Main{
         for(int i=0;i<n;i++){
             System.out.print(arr[i]+" ");
         }
+    }
+}*/
+
+//-----------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Main{
+
+    public static int[] mergeSortedArray(int[] arr1,int[] arr2){
+        int start1=0;
+        int start2=0;
+        int i=0;
+        int[] newArray=new int[arr1.length+arr2.length];
+
+        while(i<arr1.length+arr2.length){
+            if(start1<arr1.length && start2<arr2.length){
+                if(arr1[start1]>arr2[start2]){
+                    newArray[i]=arr2[start2];
+                    start2++;
+                }
+                else{
+                    newArray[i]=arr1[start1];
+                    start1++;
+                }
+            }
+            else{
+                if(start1<arr1.length){
+                    newArray[i]=arr1[start1];
+                    start1++;
+                }
+                else{
+                    newArray[i]=arr2[start2];
+                    start2++;
+                }
+            }
+            i++;
+        }
+        return newArray;
+    }
+
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        int m=scn.nextInt();
+        int[] arr1=new int[m];
+        for(int i=0;i<m;i++){
+            arr1[i]=scn.nextInt();
+        }
+        int n=scn.nextInt();
+        int[] arr2=new int[n];
+        for(int i=0;i<n;i++){
+            arr2[i]=scn.nextInt();
+        }
+
+        int[] msr=mergeSortedArray(arr1,arr2);
+        for(int i=0;i<msr.length;i++){
+            System.out.print(msr[i]+" ");
+        }
+
     }
 }
 
