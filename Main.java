@@ -74,7 +74,7 @@ public class Main{
 
 //-----------------------------------------------------------------------------------------------------
 
-import java.util.*;
+/*import java.util.*;
 
 public class Main{
 
@@ -128,6 +128,74 @@ public class Main{
             System.out.print(msr[i]+" ");
         }
 
+    }
+}*/
+
+//----------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Main{
+
+    public static int[] mergeSortedArray(int[] arr1, int[] arr2){
+        int start1=0;
+        int start2=0;
+        int i=0;
+        int[] newArray=new int[arr1.length+arr2.length];
+
+        while(i<arr1.length+arr2.length){
+            if(start1<arr1.length && start2<arr2.length){
+                if(arr1[start1]>arr2[start2]){
+                    newArray[i]=arr2[start2];
+                    start2++;
+                }
+                else{
+                    newArray[i]=arr1[start1];
+                    start1++;
+                }
+            }
+            else{
+                if(start1<arr1.length){
+                    newArray[i]=arr1[start1];
+                    start1++;
+                }
+                else{
+                    newArray[i]=arr2[start2];
+                    start2++;
+                }
+            }
+            i++;
+        }
+        return newArray;
+    }
+
+    public static int[] mergeSort(int[] arr,int low,int high){
+        if(low==high){
+            int[] ans=new int[1];
+            ans[0]=arr[low];
+            return ans;
+        }
+        int mid=(low+high)/2;
+
+        int[] arr1=mergeSort(arr,low,mid);
+        int[] arr2=mergeSort(arr,mid+1,high);
+
+        int[] ans=mergeSortedArray(arr1,arr2);
+        return ans;
+    }
+
+    public static void main(String[] args){
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scn.nextInt();
+        }
+
+        int[]ms=mergeSort(arr,0,n-1);
+        for(int i=0;i<ms.length;i++){
+            System.out.print(ms[i]+" ");
+        }
     }
 }
 
