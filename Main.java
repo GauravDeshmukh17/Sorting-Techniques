@@ -207,7 +207,7 @@ public class Main{
 
 // SORT 01
 
-import java.util.*;
+/*import java.util.*;
 
 public class Main{
 
@@ -258,5 +258,43 @@ public class Main{
         }
 
     }
-}
+}*/
 
+//----------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Main{
+    public static int[] sort01(int[] arr){
+
+        int i=0,j=0;
+        while(i!=arr.length){
+            if(arr[i]==0){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                i++;
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scn.nextInt();
+        }
+
+        sort01(arr);
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+}
