@@ -262,7 +262,9 @@ public class Main{
 
 //----------------------------------------------------------------------------------------------------------
 
-import java.util.*;
+// SORT 01 (METHOD II)
+
+/*import java.util.*;
 
 public class Main{
     public static int[] sort01(int[] arr){
@@ -293,6 +295,58 @@ public class Main{
         }
 
         sort01(arr);
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+}*/
+
+//----------------------------------------------------------------------------------------------------------
+
+// QUICK SORT
+
+import java.util.Scanner;
+
+public class Main{
+
+    public static void quickSort(int[] arr,int pivot,int low,int high){
+
+        if(low==high){
+            return;
+        }
+        if(low>high){
+            return;
+        }
+        pivot=arr[high];
+        int i=low;
+        int j=low;
+
+        while(i<=high){
+            if(arr[i]<=pivot){
+                int temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+                i++;
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+
+        quickSort(arr,pivot,0,j-2);
+        quickSort(arr,pivot,j,high);
+    }
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scn.nextInt();
+        }
+
+        quickSort(arr,arr[n-1],0,n-1);
         for(int i=0;i<n;i++){
             System.out.print(arr[i]+" ");
         }
