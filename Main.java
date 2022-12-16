@@ -305,7 +305,7 @@ public class Main{
 
 // QUICK SORT
 
-import java.util.Scanner;
+/*import java.util.Scanner;
 
 public class Main{
 
@@ -351,4 +351,61 @@ public class Main{
             System.out.print(arr[i]+" ");
         }
     }
+}*/
+
+//----------------------------------------------------------------------------------------------------------
+
+// QUICK SELECT
+// K th smallest element
+
+import java.util.Scanner;
+
+public class Main{
+    public static void quickSelect(int low,int high,int pivotIdx,int[] arr,int k){
+        if(pivotIdx==k-1){
+            System.out.println(arr[pivotIdx]);
+            return;
+        }
+        int i=low;
+        int j=low;
+        int pivot=arr[high];
+
+        while(i<=high){
+            if(arr[i]<=pivot){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                i++;
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+
+        pivotIdx=j-1;
+        if(pivotIdx>k){
+            high=pivotIdx-1;
+        }
+        else{
+            low=pivotIdx+1;
+        }
+
+        quickSelect(low,high,pivotIdx,arr,k);
+    }
+
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        int n= scn.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scn.nextInt();
+        }
+        int k= scn.nextInt();
+
+        quickSelect(0,n-1,n-1,arr,k);
+    }
 }
+
+
+
