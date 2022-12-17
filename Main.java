@@ -358,7 +358,7 @@ public class Main{
 // QUICK SELECT
 // K th smallest element
 
-import java.util.Scanner;
+/*import java.util.Scanner;
 
 public class Main{
     public static void quickSelect(int low,int high,int pivotIdx,int[] arr,int k){
@@ -405,7 +405,82 @@ public class Main{
 
         quickSelect(0,n-1,n-1,arr,k);
     }
-}
+}*/
 
+//----------------------------------------------------------------------------------------------------------
+
+// COUNT SORT
+
+import java.util.*;
+
+public class Main{
+
+    public static int maxElement(int[] arr){
+        int max=arr[0];
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+        }
+        return max;
+    }
+
+    public static int minElement(int[] arr){
+        int min=arr[0];
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<min){
+                min=arr[i];
+            }
+        }
+        return min;
+    }
+
+    public static int[] countSort(int[] arr){
+        int max=maxElement(arr);
+        int min=minElement(arr);
+
+        int fqArrRange=max-min+1;
+        int[] fqArr=new int[fqArrRange];
+
+        for(int i=0;i<arr.length;i++){
+            int val=arr[i]-min;
+            if(fqArr[val]>0){
+                fqArr[val]++;
+            }
+            else{
+                fqArr[val]=1;
+            }
+        }
+
+        for(int i=1;i<fqArr.length;i++){
+            fqArr[i]=fqArr[i]+fqArr[i-1];
+        }
+
+        int[] ans=new int[arr.length];
+        for(int i=arr.length-1;i>=0;i--){
+            int val=arr[i]-min;
+            int store=fqArr[val];
+            ans[store-1]=arr[i];
+            fqArr[val]=fqArr[val]-1;
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=scn.nextInt();
+        }
+
+        int[] cs=countSort(arr);
+        for(int i=0;i< cs.length;i++){
+            System.out.print(cs[i]+" ");
+        }
+
+    }
+}
 
 
